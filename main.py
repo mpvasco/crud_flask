@@ -35,6 +35,8 @@ def read():
     if resultValue:
         userDetails = cur.fetchall()
         return render_template('read.html',userDetails=userDetails)
+    else:
+      return 'No items'
 
 @app.route('/update/<int:id>', methods=['GET', 'POST'])
 def update(id):
@@ -52,7 +54,6 @@ def update(id):
       query = "UPDATE users SET userName = %s WHERE userID = %s;"
       cur.execute(query, (userName, id))
       resultValue= cur.fetchall()
-      print(resultValue)
       mysql.connection.commit()
       cur.close()
     return redirect('/read')
@@ -71,14 +72,12 @@ def delete(id):
     if request.method=='POST':
       cur = mysql.connection.cursor()
       query = "DELETE FROM users WHERE userID = %s;"
-      cur.execute(query, id)
+      # cur.execute(query, str(id))
+      cur.execute(query, (id,))
       resultValue= cur.fetchall()
-      print(resultValue)
       mysql.connection.commit()
       cur.close()
     return redirect('/read')
-
-
 
 
 
