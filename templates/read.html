@@ -3,6 +3,9 @@
   <tr>
     <td> {{user[0]}} </td>
     <td> {{user[1]}} </td>
+    <td> <a href="/update/{{ user[0] }}">edit</a> </td>
+    <td> <a href="/delete/{{ user[0] }}">delete</a> </td>
+
   </tr>
   {% endfor %}
 </table>
